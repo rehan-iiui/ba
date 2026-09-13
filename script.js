@@ -1,19 +1,12 @@
 // ==========================================
-// BANK APP
-// FEATURE 1
+// MYBANK
+// FEATURE 2 — TRANSFER SYSTEM
 // ==========================================
 
 
-// Starting fictional balance
 let balance = 10000;
 
-
-// Transaction storage
 let transactions = [];
-
-
-// Current action
-let currentAction = null;
 
 
 // ==========================================
@@ -23,8 +16,20 @@ let currentAction = null;
 const balanceElement =
     document.getElementById("balance");
 
+const transferBalance =
+    document.getElementById("transferBalance");
+
+const dashboardPage =
+    document.getElementById("dashboardPage");
+
+const transferPage =
+    document.getElementById("transferPage");
+
 const transferButton =
     document.getElementById("transferButton");
+
+const transferNav =
+    document.getElementById("transferNav");
 
 const depositButton =
     document.getElementById("depositButton");
@@ -32,35 +37,61 @@ const depositButton =
 const withdrawButton =
     document.getElementById("withdrawButton");
 
-const modal =
-    document.getElementById("modal");
+const transferAmount =
+    document.getElementById("transferAmount");
 
-const closeModal =
-    document.getElementById("closeModal");
+const recipientName =
+    document.getElementById("recipientName");
 
-const modalTitle =
-    document.getElementById("modalTitle");
+const transferAccount =
+    document.getElementById("transferAccount");
 
-const modalDescription =
-    document.getElementById("modalDescription");
+const reviewTransfer =
+    document.getElementById("reviewTransfer");
 
-const modalIcon =
-    document.getElementById("modalIcon");
+const confirmationModal =
+    document.getElementById(
+        "confirmationModal"
+    );
 
-const amountInput =
-    document.getElementById("amountInput");
+const successModal =
+    document.getElementById(
+        "successModal"
+    );
 
-const recipientInput =
-    document.getElementById("recipientInput");
 
-const recipientContainer =
-    document.getElementById("recipientContainer");
+// Confirmation elements
 
-const confirmButton =
-    document.getElementById("confirmButton");
+const confirmName =
+    document.getElementById("confirmName");
 
-const transactionsElement =
-    document.getElementById("transactions");
+const confirmAccount =
+    document.getElementById(
+        "confirmAccount"
+    );
+
+const confirmAmount =
+    document.getElementById(
+        "confirmAmount"
+    );
+
+
+// Receipt elements
+
+const receiptName =
+    document.getElementById(
+        "receiptName"
+    );
+
+const receiptAccount =
+    document.getElementById(
+        "receiptAccount"
+    );
+
+const receiptAmount =
+    document.getElementById(
+        "receiptAmount"
+    );
 
 
 // ==========================================
@@ -86,131 +117,288 @@ function formatMoney(amount) {
 
 function updateBalance() {
 
-    balanceElement.textContent =
+    const formatted =
         formatMoney(balance);
+
+    balanceElement.textContent =
+        formatted;
+
+    transferBalance.textContent =
+        formatted;
 }
 
 
 // ==========================================
-// OPEN MODAL
+// OPEN TRANSFER PAGE
 // ==========================================
 
-function openModal(action) {
+function openTransferPage() {
 
-    currentAction = action;
+    dashboardPage.classList.add(
+        "hidden"
+    );
 
-    amountInput.value = "";
-    recipientInput.value = "";
+    transferPage.classList.remove(
+        "hidden"
+    );
 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-    if (action === "transfer") {
-
-        modalIcon.textContent = "💸";
-
-        modalTitle.textContent =
-            "Transfer Money";
-
-        modalDescription.textContent =
-            "Enter the amount and recipient account.";
-
-        recipientContainer.style.display =
-            "block";
-
-        confirmButton.textContent =
-            "Transfer Money";
-    }
-
-
-    if (action === "deposit") {
-
-        modalIcon.textContent = "➕";
-
-        modalTitle.textContent =
-            "Deposit Money";
-
-        modalDescription.textContent =
-            "Enter the amount you want to deposit.";
-
-        recipientContainer.style.display =
-            "none";
-
-        confirmButton.textContent =
-            "Deposit Money";
-    }
-
-
-    if (action === "withdraw") {
-
-        modalIcon.textContent = "➖";
-
-        modalTitle.textContent =
-            "Withdraw Money";
-
-        modalDescription.textContent =
-            "Enter the amount you want to withdraw.";
-
-        recipientContainer.style.display =
-            "none";
-
-        confirmButton.textContent =
-            "Withdraw Money";
-    }
-
-
-    modal.classList.remove("hidden");
-
-    amountInput.focus();
+    recipientName.focus();
 }
 
 
 // ==========================================
-// CLOSE MODAL
+// OPEN DASHBOARD
 // ==========================================
 
-function closeActionModal() {
+function openDashboard() {
 
-    modal.classList.add("hidden");
+    transferPage.classList.add(
+        "hidden"
+    );
 
-    currentAction = null;
+    dashboardPage.classList.remove(
+        "hidden"
+    );
 }
 
 
 // ==========================================
-// ADD TRANSACTION
+// REVIEW TRANSFER
 // ==========================================
 
-function addTransaction(
-    name,
-    amount,
-    type
-) {
+function reviewTransferDetails() {
+
+    const name =
+        recipientName.value.trim();
+
+    const account =
+        transferAccount.value.trim();
+
+    const amount =
+        Number(
+            transferAmount.value
+        );
+
+
+    // Validate recipient
+
+    if (!name) {
+
+        alert(
+            "Please enter the recipient name."
+        );
+
+        recipientName.focus();
+
+        return;
+    }
+
+
+    // Validate account
+
+    if (!account) {
+
+        alert(
+            "Please enter the recipient account number."
+        );
+
+        transferAccount.focus();
+
+        return;
+    }
+
+
+    // Validate amount
+
+    if (
+        !amount ||
+        amount <= 0
+    ) {
+
+        alert(
+            "Please enter a valid transfer amount."
+        );
+
+        transferAmount.focus();
+
+        return;
+    }
+
+
+    // Check balance
+
+    if (amount > balance) {
+
+        alert(
+            "Insufficient balance."
+        );
+
+        return;
+    }
+
+
+    // Show confirmation details
+
+    confirmName.textContent =
+        name;
+
+    confirmAccount.textContent =
+        account;
+
+    confirmAmount.textContent =
+        formatMoney(amount);
+
+
+    confirmationModal.classList.remove(
+        "hidden"
+    );
+}
+
+
+// ==========================================
+// CLOSE CONFIRMATION
+// ==========================================
+
+function closeConfirmationModal() {
+
+    confirmationModal.classList.add(
+        "hidden"
+    );
+}
+
+
+// ==========================================
+// COMPLETE TRANSFER
+// ==========================================
+
+function completeTransfer() {
+
+    const name =
+        recipientName.value.trim();
+
+    const account =
+        transferAccount.value.trim();
+
+    const amount =
+        Number(
+            transferAmount.value
+        );
+
+
+    if (
+        !amount ||
+        amount > balance
+    ) {
+
+        closeConfirmationModal();
+
+        alert(
+            "The transfer could not be completed."
+        );
+
+        return;
+    }
+
+
+    // Deduct money
+
+    balance -= amount;
+
+
+    // Add transaction
 
     transactions.unshift({
 
-        name: name,
+        name:
+            "Transfer to " + name,
 
-        amount: amount,
+        account:
+            account,
 
-        type: type,
+        amount:
+            amount,
 
-        date: new Date()
-            .toLocaleString()
+        type:
+            "transfer",
+
+        date:
+            new Date().toLocaleString()
     });
 
 
+    updateBalance();
+
     renderTransactions();
+
+
+    // Close confirmation
+
+    closeConfirmationModal();
+
+
+    // Fill receipt
+
+    receiptName.textContent =
+        name;
+
+    receiptAccount.textContent =
+        account;
+
+    receiptAmount.textContent =
+        formatMoney(amount);
+
+
+    // Show receipt
+
+    successModal.classList.remove(
+        "hidden"
+    );
+
+
+    // Clear form
+
+    recipientName.value = "";
+    transferAccount.value = "";
+    transferAmount.value = "";
 }
 
 
 // ==========================================
-// RENDER TRANSACTIONS
+// CLOSE SUCCESS
+// ==========================================
+
+function closeSuccess() {
+
+    successModal.classList.add(
+        "hidden"
+    );
+
+    openDashboard();
+}
+
+
+// ==========================================
+// TRANSACTIONS
 // ==========================================
 
 function renderTransactions() {
 
-    if (transactions.length === 0) {
+    const container =
+        document.getElementById(
+            "transactions"
+        );
 
-        transactionsElement.innerHTML = `
+
+    if (
+        transactions.length === 0
+    ) {
+
+        container.innerHTML = `
             <div class="emptyState">
                 No transactions yet
             </div>
@@ -220,24 +408,10 @@ function renderTransactions() {
     }
 
 
-    transactionsElement.innerHTML =
+    container.innerHTML =
         transactions
             .slice(0, 8)
             .map(transaction => {
-
-                const positive =
-                    transaction.type === "deposit";
-
-                const sign =
-                    positive ? "+" : "-";
-
-                const icon =
-                    positive ? "➕" : "💸";
-
-                const iconBackground =
-                    positive
-                        ? "#e5f8ee"
-                        : "#fff0e7";
 
                 return `
 
@@ -247,32 +421,39 @@ function renderTransactions() {
 
                             <div
                                 class="transactionIcon"
-                                style="background:${iconBackground}">
-                                ${icon}
+                                style="
+                                    background:#fff0e7;
+                                ">
+
+                                💸
+
                             </div>
 
                             <div>
 
-                                <div class="transactionName">
+                                <div
+                                    class="transactionName">
+
                                     ${transaction.name}
+
                                 </div>
 
-                                <div class="transactionDate">
+                                <div
+                                    class="transactionDate">
+
                                     ${transaction.date}
+
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div
-                            class="${
-                                positive
-                                    ? "amountPositive"
-                                    : "amountNegative"
-                            }">
 
-                            ${sign}
+                        <div
+                            class="amountNegative">
+
+                            -
                             ${formatMoney(
                                 transaction.amount
                             )}
@@ -280,6 +461,7 @@ function renderTransactions() {
                         </div>
 
                     </div>
+
                 `;
 
             })
@@ -288,236 +470,76 @@ function renderTransactions() {
 
 
 // ==========================================
-// PROCESS ACTION
-// ==========================================
-
-function processAction() {
-
-    const amount =
-        Number(
-            amountInput.value
-        );
-
-
-    // Basic validation
-
-    if (
-        !amount ||
-        amount <= 0
-    ) {
-
-        alert(
-            "Please enter a valid amount."
-        );
-
-        return;
-    }
-
-
-    // ======================================
-    // DEPOSIT
-    // ======================================
-
-    if (
-        currentAction === "deposit"
-    ) {
-
-        balance += amount;
-
-        addTransaction(
-            "Cash Deposit",
-            amount,
-            "deposit"
-        );
-
-        updateBalance();
-
-        closeActionModal();
-
-        return;
-    }
-
-
-    // ======================================
-    // WITHDRAW
-    // ======================================
-
-    if (
-        currentAction === "withdraw"
-    ) {
-
-        if (amount > balance) {
-
-            alert(
-                "Insufficient balance."
-            );
-
-            return;
-        }
-
-
-        balance -= amount;
-
-        addTransaction(
-            "Cash Withdrawal",
-            amount,
-            "withdraw"
-        );
-
-        updateBalance();
-
-        closeActionModal();
-
-        return;
-    }
-
-
-    // ======================================
-    // TRANSFER
-    // ======================================
-
-    if (
-        currentAction === "transfer"
-    ) {
-
-        const recipient =
-            recipientInput.value.trim();
-
-
-        if (!recipient) {
-
-            alert(
-                "Please enter a recipient account number."
-            );
-
-            recipientInput.focus();
-
-            return;
-        }
-
-
-        if (amount > balance) {
-
-            alert(
-                "Insufficient balance."
-            );
-
-            return;
-        }
-
-
-        balance -= amount;
-
-
-        addTransaction(
-            "Transfer to " + recipient,
-            amount,
-            "transfer"
-        );
-
-
-        updateBalance();
-
-        closeActionModal();
-    }
-}
-
-
-// ==========================================
-// BUTTON EVENTS
+// BUTTONS
 // ==========================================
 
 transferButton.addEventListener(
     "click",
-    () => {
-
-        openModal("transfer");
-
-    }
+    openTransferPage
 );
 
 
-depositButton.addEventListener(
+transferNav.addEventListener(
     "click",
-    () => {
-
-        openModal("deposit");
-
-    }
+    openTransferPage
 );
 
 
-withdrawButton.addEventListener(
+reviewTransfer.addEventListener(
     "click",
-    () => {
-
-        openModal("withdraw");
-
-    }
+    reviewTransferDetails
 );
 
 
-closeModal.addEventListener(
-    "click",
-    closeActionModal
-);
+document
+    .getElementById(
+        "closeConfirmation"
+    )
+    .addEventListener(
+        "click",
+        closeConfirmationModal
+    );
 
 
-confirmButton.addEventListener(
-    "click",
-    processAction
-);
+document
+    .getElementById(
+        "confirmTransfer"
+    )
+    .addEventListener(
+        "click",
+        completeTransfer
+    );
+
+
+document
+    .getElementById(
+        "doneButton"
+    )
+    .addEventListener(
+        "click",
+        closeSuccess
+    );
 
 
 // ==========================================
-// CLOSE WHEN CLICKING OUTSIDE
+// ESC KEY
 // ==========================================
 
-modal.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target === modal
-        ) {
-
-            closeActionModal();
-
-        }
-
-    }
-);
-
-
-// ==========================================
-// ENTER KEY
-// ==========================================
-
-amountInput.addEventListener(
+document.addEventListener(
     "keydown",
     event => {
 
         if (
-            event.key === "Enter"
+            event.key === "Escape"
         ) {
 
-            processAction();
+            confirmationModal.classList.add(
+                "hidden"
+            );
 
-        }
-
-    }
-);
-
-
-recipientInput.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            processAction();
+            successModal.classList.add(
+                "hidden"
+            );
 
         }
 
