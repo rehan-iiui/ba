@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logoIcon">M</div>
+                <div>
+                    <h2>MyBank</h2>
+                    <span>Digital Banking</span>
+                </div>
+            </div>
+
+            <nav>
+                <button class="navButton active">
+                    🏠 Dashboard
+                </button>
+
+                <button class="navButton">
+                    💸 Transfer
+                </button>
+
+                <button class="navButton">
+                    ➕ Deposit
+                </button>
+
+                <button class="navButton">
+                    ➖ Withdraw
+                </button>
+
+                <button class="navButton">
+                    📋 Transactions
+                </button>
+            </nav>
+
+            <div class="sidebarBottom">
+                <span>Simulation Mode</span>
+            </div>
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <header class="topbar">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back</p>
+                </div>
+
+                <div class="profile">
+                    <div class="avatar">U</div>
+                    <span>User</span>
+                </div>
+            </header>
+
+
+            <!-- BALANCE -->
+            <section class="balanceCard">
+
+                <div>
+                    <span class="balanceLabel">
+                        Available Balance
+                    </span>
+
+                    <h2 id="balance">
+                        Rs 10,000.00
+                    </h2>
+
+                    <span class="accountNumber">
+                        Account •••• 4821
+                    </span>
+                </div>
+
+                <div class="balanceIcon">
+                    ₨
+                </div>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+            <section class="section">
+
+                <h2>Quick Actions</h2>
+
+                <div class="actions">
+
+                    <button
+                        class="actionCard transfer"
+                        id="transferButton">
+
+                        <div class="actionIcon">
+                            💸
+                        </div>
+
+                        <div>
+                            <strong>Transfer Money</strong>
+                            <span>Send money</span>
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="actionCard deposit"
+                        id="depositButton">
+
+                        <div class="actionIcon">
+                            ➕
+                        </div>
+
+                        <div>
+                            <strong>Deposit Money</strong>
+                            <span>Add money</span>
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="actionCard withdraw"
+                        id="withdrawButton">
+
+                        <div class="actionIcon">
+                            ➖
+                        </div>
+
+                        <div>
+                            <strong>Withdraw Money</strong>
+                            <span>Take money out</span>
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- TRANSACTIONS -->
+            <section class="section">
+
+                <div class="sectionHeader">
+                    <h2>Recent Transactions</h2>
+                    <button id="viewAllButton">
+                        View All
+                    </button>
+                </div>
+
+                <div
+                    id="transactions"
+                    class="transactions">
+
+                    <div class="emptyState">
+                        No transactions yet
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ACTION MODAL -->
+
+    <div
+        id="modal"
+        class="modal hidden">
+
+        <div class="modalBox">
+
+            <button
+                id="closeModal"
+                class="closeButton">
+                ×
+            </button>
+
+            <div
+                id="modalIcon"
+                class="modalIcon">
+                💸
+            </div>
+
+            <h2 id="modalTitle">
+                Transfer Money
+            </h2>
+
+            <p id="modalDescription">
+                Enter the amount.
+            </p>
+
+            <input
+                id="amountInput"
+                type="number"
+                min="1"
+                placeholder="Enter amount">
+
+            <div
+                id="recipientContainer"
+                class="recipientContainer">
+
+                <input
+                    id="recipientInput"
+                    type="text"
+                    placeholder="Recipient account number">
+
+            </div>
+
+            <button
+                id="confirmButton"
+                class="confirmButton">
+                Confirm
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
