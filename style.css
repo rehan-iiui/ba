@@ -1,495 +1,201 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    background: #f3f6fa;
-    color: #172033;
-}
-
-button,
-input {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-}
-
-
 /* ==========================================
-   APP
+   TRANSFER PAGE
    ========================================== */
 
-.app {
-    min-height: 100vh;
-    display: flex;
+.hidden {
+    display: none !important;
 }
 
-
-/* ==========================================
-   SIDEBAR
-   ========================================== */
-
-.sidebar {
-    width: 250px;
-    min-height: 100vh;
-    background: #101827;
-    color: white;
-    padding: 25px 18px;
-    display: flex;
-    flex-direction: column;
+.transferPage {
+    margin-top: 5px;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 45px;
-}
-
-.logoIcon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: #2477ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.logo h2 {
-    font-size: 19px;
-}
-
-.logo span {
-    font-size: 11px;
-    color: #8f9bad;
-}
-
-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-.navButton {
-    width: 100%;
-    padding: 13px 15px;
-    border-radius: 10px;
-    background: transparent;
-    color: #aeb7c7;
-    text-align: left;
-    transition: 0.2s;
-}
-
-.navButton:hover,
-.navButton.active {
-    background: #1c2a40;
-    color: white;
-}
-
-.sidebarBottom {
-    margin-top: auto;
-    color: #718096;
-    font-size: 12px;
-    padding: 10px;
-}
-
-
-/* ==========================================
-   MAIN
-   ========================================== */
-
-.main {
-    flex: 1;
-    padding: 35px;
-    max-width: 1200px;
-    margin: auto;
-    width: 100%;
-}
-
-
-/* ==========================================
-   TOPBAR
-   ========================================== */
-
-.topbar {
+.pageTitle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
 }
 
-.topbar h1 {
-    font-size: 30px;
+.pageTitle h2 {
+    font-size: 25px;
 }
 
-.topbar p {
+.pageTitle p {
     color: #7c8798;
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
-.profile {
+.transferBalance {
+    background: white;
+    padding: 13px 17px;
+    border-radius: 10px;
+    color: #778296;
+    font-size: 13px;
+}
+
+.transferBalance strong {
+    color: #172033;
+    margin-left: 5px;
+}
+
+.transferCard {
+    background: white;
+    max-width: 650px;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.step {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 600;
+    gap: 13px;
+    margin-bottom: 22px;
 }
 
-.avatar {
-    width: 38px;
-    height: 38px;
+.stepNumber {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background: #2477ff;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
 }
 
-
-/* ==========================================
-   BALANCE
-   ========================================== */
-
-.balanceCard {
-    background: linear-gradient(
-        135deg,
-        #1769e8,
-        #124fc0
-    );
-
-    border-radius: 20px;
-    padding: 30px;
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-shadow:
-        0 15px 35px rgba(23, 105, 232, 0.22);
-
-    margin-bottom: 32px;
-}
-
-.balanceLabel {
-    font-size: 14px;
-    opacity: 0.8;
-}
-
-.balanceCard h2 {
-    font-size: 38px;
-    margin: 10px 0;
-}
-
-.accountNumber {
-    font-size: 13px;
-    opacity: 0.75;
-}
-
-.balanceIcon {
-    width: 65px;
-    height: 65px;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.16);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 30px;
-}
-
-
-/* ==========================================
-   SECTIONS
-   ========================================== */
-
-.section {
-    margin-bottom: 35px;
-}
-
-.section h2 {
-    font-size: 20px;
-    margin-bottom: 16px;
-}
-
-.actions {
-    display: grid;
-    grid-template-columns:
-        repeat(3, 1fr);
-    gap: 16px;
-}
-
-
-/* ==========================================
-   ACTION CARDS
-   ========================================== */
-
-.actionCard {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    text-align: left;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.05);
-
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
-}
-
-.actionCard:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.08);
-}
-
-.actionIcon {
-    width: 48px;
-    height: 48px;
-    border-radius: 13px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 21px;
-}
-
-.transfer .actionIcon {
-    background: #e7efff;
-}
-
-.deposit .actionIcon {
-    background: #e5f8ee;
-}
-
-.withdraw .actionIcon {
-    background: #fff0e7;
-}
-
-.actionCard strong {
+.step strong {
     display: block;
-    margin-bottom: 5px;
 }
 
-.actionCard span {
+.step small {
     color: #8993a4;
+}
+
+.secondStep {
+    margin-top: 28px;
+}
+
+.transferCard label {
+    display: block;
     font-size: 13px;
-}
-
-
-/* ==========================================
-   TRANSACTIONS
-   ========================================== */
-
-.sectionHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sectionHeader button {
-    background: transparent;
-    color: #2477ff;
     font-weight: 600;
+    margin: 14px 0 7px;
 }
 
-.transactions {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.04);
-}
-
-.emptyState {
-    padding: 35px;
-    text-align: center;
-    color: #8b95a5;
-}
-
-
-/* ==========================================
-   MODAL
-   ========================================== */
-
-.modal {
-    position: fixed;
-    inset: 0;
-
-    background: rgba(5, 12, 25, 0.55);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.modal.hidden {
-    display: none;
-}
-
-.modalBox {
-    position: relative;
-
+.transferCard input {
     width: 100%;
-    max-width: 430px;
-
-    background: white;
-    border-radius: 20px;
-
-    padding: 30px;
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,0.2);
-}
-
-.closeButton {
-    position: absolute;
-    right: 18px;
-    top: 15px;
-
-    background: transparent;
-
-    font-size: 28px;
-    color: #7d8797;
-}
-
-.modalIcon {
-    width: 55px;
-    height: 55px;
-
-    border-radius: 15px;
-    background: #eaf1ff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 24px;
-
-    margin-bottom: 18px;
-}
-
-.modalBox h2 {
-    margin-bottom: 7px;
-}
-
-.modalBox p {
-    color: #7c8798;
-    margin-bottom: 20px;
-}
-
-.modalBox input {
-    width: 100%;
-
+    padding: 14px;
     border: 1px solid #dce2ea;
     border-radius: 10px;
-
-    padding: 13px 14px;
-
     outline: none;
-
-    margin-bottom: 12px;
 }
 
-.modalBox input:focus {
+.transferCard input:focus {
     border-color: #2477ff;
 }
 
-.confirmButton {
-    width: 100%;
-
-    padding: 14px;
-
+.amountBox {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dce2ea;
     border-radius: 10px;
+    overflow: hidden;
+}
 
+.amountBox span {
+    padding-left: 14px;
+    font-weight: 600;
+}
+
+.amountBox input {
+    border: none;
+}
+
+.primaryButton {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
     background: #2477ff;
     color: white;
+    font-weight: 700;
+    margin-top: 24px;
+}
 
-    font-weight: 600;
-
-    margin-top: 8px;
+.primaryButton:hover {
+    background: #1765d6;
 }
 
 
 /* ==========================================
-   TRANSACTION ROW
+   CONFIRMATION
    ========================================== */
 
-.transactionRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 17px 20px;
-
-    border-bottom: 1px solid #edf0f4;
+.confirmationDetails {
+    background: #f5f7fa;
+    border-radius: 12px;
+    padding: 8px 16px;
 }
 
-.transactionRow:last-child {
+.confirmationDetails div,
+.receipt div {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #e4e8ee;
+}
+
+.confirmationDetails div:last-child,
+.receipt div:last-child {
     border-bottom: none;
 }
 
-.transactionInfo {
-    display: flex;
-    align-items: center;
-    gap: 13px;
+.confirmationDetails span,
+.receipt span {
+    color: #7c8798;
+    font-size: 13px;
 }
 
-.transactionIcon {
-    width: 40px;
-    height: 40px;
+.confirmationDetails strong,
+.receipt strong {
+    text-align: right;
+}
 
-    border-radius: 10px;
 
+/* ==========================================
+   SUCCESS
+   ========================================== */
+
+.successBox {
+    text-align: center;
+}
+
+.successIcon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #e4f8ed;
+    color: #18a261;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 34px;
+    font-weight: bold;
 }
 
-.transactionName {
-    font-weight: 600;
+.receipt {
+    background: #f5f7fa;
+    border-radius: 12px;
+    padding: 8px 16px;
+    text-align: left;
+    margin-top: 20px;
 }
 
-.transactionDate {
-    font-size: 12px;
-    color: #8b95a5;
-    margin-top: 3px;
-}
-
-.amountPositive {
-    color: #16a05d;
-    font-weight: 700;
-}
-
-.amountNegative {
-    color: #e04c4c;
-    font-weight: 700;
+.successText {
+    color: #18a261;
 }
 
 
@@ -497,31 +203,17 @@ nav {
    MOBILE
    ========================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
 
-    .sidebar {
-        width: 75px;
-        padding: 20px 10px;
+    .pageTitle {
+        display: block;
     }
 
-    .logo div:not(.logoIcon),
-    .navButton {
-        font-size: 0;
+    .transferBalance {
+        margin-top: 15px;
     }
 
-    .navButton {
-        text-align: center;
-    }
-
-    .main {
-        padding: 20px;
-    }
-
-    .actions {
-        grid-template-columns: 1fr;
-    }
-
-    .balanceCard h2 {
-        font-size: 29px;
+    .transferCard {
+        padding: 22px;
     }
 }
